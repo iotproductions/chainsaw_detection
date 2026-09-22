@@ -217,7 +217,16 @@ with st.spinner("Đang xử lý âm thanh & suy luận mô hình..."):
     )
     S_db = librosa.power_to_db(S, ref=np.max, top_db=65.0)
     S_norm = np.clip((S_db + 65.0) / 65.0, 0.0, 1.0)
-    colormap = cm.get_cmap('magma')
+    
+    # colormap = cm.get_cmap('magma')
+
+    # Sử dụng colormaps['magma'] chuẩn Matplotlib mới
+    import matplotlib as mpl
+    try:
+        colormap = mpl.colormaps['magma']
+    except (AttributeError, KeyError):
+        import matplotlib.cm as cm
+        colormap = cm.get_cmap('magma')
     spec_rgba = (colormap(S_norm) * 255).astype(np.uint8)
 
     # Xuất audio WAV 16-bit chuẩn sang base64 để browser phát trực tiếp
