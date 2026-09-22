@@ -1,0 +1,7 @@
+streamlit
+numpy
+soundfile
+librosa
+matplotlib
+scipy
+ai-edge-litert
